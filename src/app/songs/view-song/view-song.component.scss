@@ -1,0 +1,11 @@
+span.chord, span.lyric {
+  display: inline-block;
+}
+
+p.song-line, span.chord {
+  font-family: monospace;
+}
+
+p.song-line-chorus-verse {
+  margin-top: 2em;
+}

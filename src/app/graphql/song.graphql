@@ -1,0 +1,130 @@
+input CorrectedSongQueryInput {
+  AND: [CorrectedSongQueryInput!]
+  _id_gte: ObjectId
+  composer: [String]
+  chords: [CorrectedSongChordQueryInput]
+  lyricist_exists: Boolean
+  timeSignature_gte: String
+  timeSignature_in: [String]
+  timeSignature_lte: String
+  _id_ne: ObjectId
+  _id_in: [ObjectId]
+  timeSignature_gt: String
+  _id_lte: ObjectId
+  timeSignature_ne: String
+  timeSignature_lt: String
+  composer_in: [String]
+  _id: ObjectId
+  artist_exists: Boolean
+  lyricist_nin: [String]
+  composer_exists: Boolean
+  _id_gt: ObjectId
+  chords_exists: Boolean
+  artist: [String]
+  timeSignature_nin: [String]
+  _id_lt: ObjectId
+  composer_nin: [String]
+  timeSignature: String
+  lyricist: [String]
+  _id_nin: [ObjectId]
+  artist_nin: [String]
+  chords_in: [CorrectedSongChordQueryInput]
+  timeSignature_exists: Boolean
+  lyricist_in: [String]
+  chords_nin: [CorrectedSongChordQueryInput]
+  _id_exists: Boolean
+  artist_in: [String]
+  OR: [CorrectedSongQueryInput!]
+}
+input CorrectedSongChordQueryInput {
+  title_ne: String
+  title: String
+  content: [String]
+  AND: [CorrectedSongChordQueryInput!]
+  title_lte: String
+  title_nin: [String]
+  title_gte: String
+  title_exists: Boolean
+  title_lt: String
+  content_in: [String]
+  OR: [CorrectedSongChordQueryInput!]
+  title_gt: String
+  title_in: [String]
+  content_nin: [String]
+  content_exists: Boolean
+}
+enum CorrectedSongSortByInput {
+  _ID_ASC
+  _ID_DESC
+  TIMESIGNATURE_ASC
+  TIMESIGNATURE_DESC
+}
+input CorrectedSongChordUpdateInput {
+  title: String
+  title_unset: Boolean
+  content: [String]
+  content_unset: Boolean
+}
+type CorrectedSong {
+  _id: ObjectId!
+  artist: [String]
+  chords: [CorrectedSongChord]
+  composer: [String]
+  lyricist: [String]
+  timeSignature: String
+}
+input CorrectedSongInsertInput {
+  artist: [String]
+  lyricist: [String]
+  composer: [String]
+  timeSignature: String
+  chords: [CorrectedSongChordInsertInput]
+  _id: ObjectId
+}
+input CorrectedSongChordInsertInput {
+  title: String
+  content: [String]
+}
+type Query {
+  correctedSong(query: CorrectedSongQueryInput): CorrectedSong
+  correctedSongs(query: CorrectedSongQueryInput, limit: Int = 100, sortBy: CorrectedSongSortByInput): [CorrectedSong]!
+}
+type Mutation {
+  deleteManyCorrectedSongs(query: CorrectedSongQueryInput): DeleteManyPayload
+  deleteOneCorrectedSong(query: CorrectedSongQueryInput!): CorrectedSong
+  insertManyCorrectedSongs(data: [CorrectedSongInsertInput!]!): InsertManyPayload
+  insertOneCorrectedSong(data: CorrectedSongInsertInput!): CorrectedSong
+  replaceOneCorrectedSong(query: CorrectedSongQueryInput, data: CorrectedSongInsertInput!): CorrectedSong
+  updateManyCorrectedSongs(query: CorrectedSongQueryInput, set: CorrectedSongUpdateInput!): UpdateManyPayload
+  updateOneCorrectedSong(query: CorrectedSongQueryInput, set: CorrectedSongUpdateInput!): CorrectedSong
+  upsertOneCorrectedSong(query: CorrectedSongQueryInput, data: CorrectedSongInsertInput!): CorrectedSong
+}
+type DeleteManyPayload {
+  deletedCount: Int!
+}
+scalar ObjectId
+type CorrectedSongChord {
+  content: [String]
+  title: String
+}
+type InsertManyPayload {
+  insertedIds: [ObjectId]!
+}
+input CorrectedSongUpdateInput {
+  chords_unset: Boolean
+  timeSignature_unset: Boolean
+  _id_unset: Boolean
+  lyricist_unset: Boolean
+  timeSignature: String
+  chords: [CorrectedSongChordUpdateInput]
+  lyricist: [String]
+  artist_unset: Boolean
+  _id: ObjectId
+  composer: [String]
+  composer_unset: Boolean
+  artist: [String]
+}
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}
