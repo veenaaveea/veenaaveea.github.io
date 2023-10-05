@@ -14,7 +14,10 @@ const setEnv = () => {
     production: false,
     mongo: {
       realm: {
-        appId: "${process.env['MONGO.REALM.APP_ID']}"
+        appId: "${process.env['MONGO.REALM.APP_ID']}",
+        apiKeys: {
+          anonymous: "${process.env['MONGO.REALM.API_KEYS.ANONYMOUS']}"
+        }
       },
       graphqlUrl: "${process.env['MONGO.GRAPHQL_URL']}"
     },

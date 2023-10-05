@@ -7,3 +7,18 @@ export type AuthenticationError = {
   errorCode: string,
   link: string,
 }
+
+export type AtlasUserIdentity = {
+  id?: string,
+  providerType?: string
+}
+
+export type AtlasUserData = {
+  name?: string
+}
+
+export type UserProfile = {
+  type?: string,
+  identities?: Array<AtlasUserIdentity>,
+  data?: AtlasUserData
+}

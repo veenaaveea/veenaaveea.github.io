@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import jwt_decode, {JwtPayload} from 'jwt-decode';
 import * as Realm from "realm-web";
 import {environment} from "../../environments/environment";
@@ -12,20 +12,27 @@ import {LoaderService} from "./loader.service";
 })
 export class AuthService {
   private realmApp = new Realm.App(environment.mongo.realm.appId);
-  private userId?: string;
+  private anonymous: boolean = true;
 
   constructor(
     private authStorageService: AuthStorageService,
     private router: Router,
     private loaderService: LoaderService
-  ) { }
+  ) {
+    this.refresh()
+      .then(() => {
+        console.log(`Authentication data refreshed`);
+      });
+  }
 
   get loggedIn(): boolean {
     let loggedIn = false;
 
-    if (this.accessToken) {
+    if (this.realmApp.currentUser && this.accessToken) {
       const jwtData = jwt_decode<JwtPayload>(this.accessToken);
-      loggedIn = DateTime.now().toUnixInteger() < jwtData.exp!;
+      const profile = this.authStorageService.getUserProfile(this.realmApp.currentUser.id);
+      const name = profile.data?.name;
+      loggedIn = name != 'anonymous' && DateTime.now().toUnixInteger() < jwtData.exp!;
     }
 
     return loggedIn;
@@ -58,7 +65,12 @@ export class AuthService {
     this.realmApp.currentUser?.logOut()
       .then(() => {
         this.authStorageService.clearAuthStorage();
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/')
+          .then(res => {
+            if (res) {
+              console.log(res);
+            }
+          });
       })
       .catch(err => {
         console.log(err);
@@ -74,14 +86,11 @@ export class AuthService {
 
   async refresh(): Promise<void> {
     if (!this.realmApp.currentUser) {
-      await this.realmApp.logIn(Realm.Credentials.anonymous())
-        .then(res => {
-          console.log(res);
-          return res;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      if (this.accessToken) {
+        await this.realmApp.logIn(Realm.Credentials.jwt(this.accessToken));
+      } else {
+        await this.realmApp.logIn(Realm.Credentials.apiKey(environment.mongo.realm.apiKeys.anonymous));
+      }
     } else {
       await this.realmApp.currentUser.refreshCustomData();
     }

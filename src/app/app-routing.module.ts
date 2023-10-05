@@ -26,11 +26,7 @@ const ROUTES: Routes = [
   },
   {
     path: 'songs/:id',
-    component: ViewSongComponent,
-    canActivate: [authGuard],
-    data: {
-      roles: 0
-    }
+    component: ViewSongComponent
   },
   {
     path: 'admin/songs/old/:id',
