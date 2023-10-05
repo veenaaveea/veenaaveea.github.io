@@ -1,57 +1,255 @@
-input CorrectedSongQueryInput {
-  AND: [CorrectedSongQueryInput!]
-  _id_gte: ObjectId
-  composer: [String]
-  chords: [CorrectedSongChordQueryInput]
-  lyricist_exists: Boolean
-  timeSignature_gte: String
-  timeSignature_in: [String]
-  timeSignature_lte: String
-  _id_ne: ObjectId
-  _id_in: [ObjectId]
-  timeSignature_gt: String
-  _id_lte: ObjectId
-  timeSignature_ne: String
-  timeSignature_lt: String
-  composer_in: [String]
+scalar ObjectId
+type ArtistName {
+  en_USA: ArtistNameEn_USA
+  si_LKA: ArtistNameSi_LKA
+}
+type ArtistNameSi_LKA {
+  text: String
+  transliterated: Boolean
+}
+enum ArtistSortByInput {
+  _ID_ASC
+  _ID_DESC
+}
+type ClSong {
   _id: ObjectId
-  artist_exists: Boolean
-  lyricist_nin: [String]
-  composer_exists: Boolean
-  _id_gt: ObjectId
-  chords_exists: Boolean
-  artist: [String]
-  timeSignature_nin: [String]
-  _id_lt: ObjectId
-  composer_nin: [String]
-  timeSignature: String
-  lyricist: [String]
+  hasProcessed: Boolean
+  songData: String
+  songMeta: String
+  sourceId: Int
+  sourceUrl: String
+}
+type Mutation {
+  deleteManyArtists(query: ArtistQueryInput): DeleteManyPayload
+  deleteManyClSongs(query: ClSongQueryInput): DeleteManyPayload
+  deleteManyCorrectedSongs(query: CorrectedSongQueryInput): DeleteManyPayload
+  deleteOneArtist(query: ArtistQueryInput!): Artist
+  deleteOneClSong(query: ClSongQueryInput!): ClSong
+  deleteOneCorrectedSong(query: CorrectedSongQueryInput!): CorrectedSong
+  insertManyArtists(data: [ArtistInsertInput!]!): InsertManyPayload
+  insertManyClSongs(data: [ClSongInsertInput!]!): InsertManyPayload
+  insertManyCorrectedSongs(data: [CorrectedSongInsertInput!]!): InsertManyPayload
+  insertOneArtist(data: ArtistInsertInput!): Artist
+  insertOneClSong(data: ClSongInsertInput!): ClSong
+  insertOneCorrectedSong(data: CorrectedSongInsertInput!): CorrectedSong
+  replaceOneArtist(query: ArtistQueryInput, data: ArtistInsertInput!): Artist
+  replaceOneClSong(query: ClSongQueryInput, data: ClSongInsertInput!): ClSong
+  replaceOneCorrectedSong(data: CorrectedSongInsertInput!, query: CorrectedSongQueryInput): CorrectedSong
+  updateManyArtists(query: ArtistQueryInput, set: ArtistUpdateInput!): UpdateManyPayload
+  updateManyClSongs(set: ClSongUpdateInput!, query: ClSongQueryInput): UpdateManyPayload
+  updateManyCorrectedSongs(query: CorrectedSongQueryInput, set: CorrectedSongUpdateInput!): UpdateManyPayload
+  updateOneArtist(set: ArtistUpdateInput!, query: ArtistQueryInput): Artist
+  updateOneClSong(query: ClSongQueryInput, set: ClSongUpdateInput!): ClSong
+  updateOneCorrectedSong(query: CorrectedSongQueryInput, set: CorrectedSongUpdateInput!): CorrectedSong
+  upsertOneArtist(query: ArtistQueryInput, data: ArtistInsertInput!): Artist
+  upsertOneClSong(query: ClSongQueryInput, data: ClSongInsertInput!): ClSong
+  upsertOneCorrectedSong(query: CorrectedSongQueryInput, data: CorrectedSongInsertInput!): CorrectedSong
+}
+input ArtistNameInsertInput {
+  en_USA: ArtistNameEn_USAInsertInput
+  si_LKA: ArtistNameSi_LKAInsertInput
+}
+input ArtistQueryInput {
+  _id_gte: ObjectId
   _id_nin: [ObjectId]
-  artist_nin: [String]
-  chords_in: [CorrectedSongChordQueryInput]
-  timeSignature_exists: Boolean
-  lyricist_in: [String]
-  chords_nin: [CorrectedSongChordQueryInput]
+  AND: [ArtistQueryInput!]
+  OR: [ArtistQueryInput!]
   _id_exists: Boolean
-  artist_in: [String]
+  name_exists: Boolean
+  _id_gt: ObjectId
+  type_exists: Boolean
+  _id_in: [ObjectId]
+  _id_ne: ObjectId
+  _id_lt: ObjectId
+  type: [String]
+  type_in: [String]
+  name: ArtistNameQueryInput
+  _id_lte: ObjectId
+  type_nin: [String]
+  _id: ObjectId
+}
+type Artist {
+  _id: ObjectId
+  name: ArtistName
+  type: [String]
+}
+input CorrectedSongQueryInput {
+  chords_exists: Boolean
+  timeSignature_lt: String
+  _id_lt: ObjectId
+  lyricist: [String]
+  timeSignature_exists: Boolean
+  artist_exists: Boolean
+  _id_gt: ObjectId
+  timeSignature_nin: [String]
+  timeSignature_ne: String
+  lyricist_exists: Boolean
+  composer: [String]
+  timeSignature: String
+  chords_nin: [CorrectedSongChordQueryInput]
+  lyricist_in: [String]
   OR: [CorrectedSongQueryInput!]
+  timeSignature_gte: String
+  artist: [String]
+  artist_nin: [String]
+  AND: [CorrectedSongQueryInput!]
+  composer_in: [String]
+  timeSignature_gt: String
+  _id_ne: ObjectId
+  composer_nin: [String]
+  composer_exists: Boolean
+  artist_in: [String]
+  timeSignature_lte: String
+  _id_in: [ObjectId]
+  _id_exists: Boolean
+  lyricist_nin: [String]
+  _id_lte: ObjectId
+  chords_in: [CorrectedSongChordQueryInput]
+  _id_gte: ObjectId
+  timeSignature_in: [String]
+  _id_nin: [ObjectId]
+  _id: ObjectId
+  chords: [CorrectedSongChordQueryInput]
 }
 input CorrectedSongChordQueryInput {
-  title_ne: String
-  title: String
+  content_in: [String]
   content: [String]
-  AND: [CorrectedSongChordQueryInput!]
+  title_lt: String
+  OR: [CorrectedSongChordQueryInput!]
   title_lte: String
   title_nin: [String]
+  AND: [CorrectedSongChordQueryInput!]
   title_gte: String
-  title_exists: Boolean
-  title_lt: String
-  content_in: [String]
-  OR: [CorrectedSongChordQueryInput!]
-  title_gt: String
   title_in: [String]
+  title: String
   content_nin: [String]
   content_exists: Boolean
+  title_ne: String
+  title_gt: String
+  title_exists: Boolean
+}
+input ClSongQueryInput {
+  OR: [ClSongQueryInput!]
+  _id_in: [ObjectId]
+  sourceUrl_ne: String
+  sourceId_gt: Int
+  sourceUrl_gt: String
+  sourceId_exists: Boolean
+  _id: ObjectId
+  sourceUrl_nin: [String]
+  sourceUrl_exists: Boolean
+  _id_exists: Boolean
+  songData: String
+  songData_gt: String
+  sourceUrl_lt: String
+  _id_lte: ObjectId
+  AND: [ClSongQueryInput!]
+  _id_ne: ObjectId
+  _id_lt: ObjectId
+  songData_exists: Boolean
+  sourceId_gte: Int
+  songMeta_lt: String
+  sourceId_in: [Int]
+  songData_ne: String
+  songMeta: String
+  hasProcessed: Boolean
+  _id_gt: ObjectId
+  sourceId_lte: Int
+  sourceUrl_lte: String
+  sourceUrl_gte: String
+  sourceId_lt: Int
+  _id_gte: ObjectId
+  songMeta_exists: Boolean
+  songMeta_gte: String
+  hasProcessed_ne: Boolean
+  songMeta_nin: [String]
+  songMeta_ne: String
+  songData_gte: String
+  _id_nin: [ObjectId]
+  songData_lte: String
+  songMeta_lte: String
+  songData_in: [String]
+  sourceId_ne: Int
+  sourceUrl_in: [String]
+  sourceId_nin: [Int]
+  songMeta_gt: String
+  hasProcessed_exists: Boolean
+  songData_nin: [String]
+  songMeta_in: [String]
+  sourceId: Int
+  songData_lt: String
+  sourceUrl: String
+}
+input ClSongInsertInput {
+  sourceId: Int
+  sourceUrl: String
+  hasProcessed: Boolean
+  _id: ObjectId
+  songData: String
+  songMeta: String
+}
+input CorrectedSongUpdateInput {
+  composer: [String]
+  _id_unset: Boolean
+  artist_unset: Boolean
+  timeSignature: String
+  lyricist_unset: Boolean
+  artist: [String]
+  lyricist: [String]
+  composer_unset: Boolean
+  timeSignature_unset: Boolean
+  chords: [CorrectedSongChordUpdateInput]
+  chords_unset: Boolean
+  _id: ObjectId
+}
+input ArtistUpdateInput {
+  type: [String]
+  type_unset: Boolean
+  _id: ObjectId
+  _id_unset: Boolean
+  name: ArtistNameUpdateInput
+  name_unset: Boolean
+}
+input ArtistNameEn_USAUpdateInput {
+  text_unset: Boolean
+  transliterated: Boolean
+  transliterated_unset: Boolean
+  text: String
+}
+type Query {
+  artist(query: ArtistQueryInput): Artist
+  artists(query: ArtistQueryInput, limit: Int = 100, sortBy: ArtistSortByInput): [Artist]!
+  clSong(query: ClSongQueryInput): ClSong
+  clSongs(query: ClSongQueryInput, limit: Int = 100, sortBy: ClSongSortByInput): [ClSong]!
+  correctedSong(query: CorrectedSongQueryInput): CorrectedSong
+  correctedSongs(limit: Int = 100, sortBy: CorrectedSongSortByInput, query: CorrectedSongQueryInput): [CorrectedSong]!
+}
+type InsertManyPayload {
+  insertedIds: [ObjectId]!
+}
+input ArtistNameEn_USAInsertInput {
+  text: String
+  transliterated: Boolean
+}
+input ArtistNameSi_LKAInsertInput {
+  text: String
+  transliterated: Boolean
+}
+input ArtistNameSi_LKAQueryInput {
+  text_nin: [String]
+  text: String
+  text_ne: String
+  OR: [ArtistNameSi_LKAQueryInput!]
+  AND: [ArtistNameSi_LKAQueryInput!]
+  transliterated_exists: Boolean
+  transliterated: Boolean
+  text_in: [String]
+  text_gte: String
+  text_exists: Boolean
+  text_gt: String
+  text_lt: String
+  text_lte: String
+  transliterated_ne: Boolean
 }
 enum CorrectedSongSortByInput {
   _ID_ASC
@@ -59,11 +257,85 @@ enum CorrectedSongSortByInput {
   TIMESIGNATURE_ASC
   TIMESIGNATURE_DESC
 }
+enum ClSongSortByInput {
+  SOURCEID_DESC
+  SOURCEURL_DESC
+  _ID_ASC
+  _ID_DESC
+  SONGDATA_ASC
+  SONGDATA_DESC
+  SONGMETA_DESC
+  SONGMETA_ASC
+  SOURCEID_ASC
+  SOURCEURL_ASC
+}
+input CorrectedSongInsertInput {
+  timeSignature: String
+  chords: [CorrectedSongChordInsertInput]
+  _id: ObjectId
+  artist: [String]
+  lyricist: [String]
+  composer: [String]
+}
+type DeleteManyPayload {
+  deletedCount: Int!
+}
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}
+input ArtistNameUpdateInput {
+  en_USA: ArtistNameEn_USAUpdateInput
+  en_USA_unset: Boolean
+  si_LKA: ArtistNameSi_LKAUpdateInput
+  si_LKA_unset: Boolean
+}
+type CorrectedSongChord {
+  content: [String]
+  title: String
+}
 input CorrectedSongChordUpdateInput {
+  content_unset: Boolean
   title: String
   title_unset: Boolean
   content: [String]
-  content_unset: Boolean
+}
+input ArtistNameSi_LKAUpdateInput {
+  text: String
+  text_unset: Boolean
+  transliterated: Boolean
+  transliterated_unset: Boolean
+}
+input ArtistNameQueryInput {
+  en_USA: ArtistNameEn_USAQueryInput
+  en_USA_exists: Boolean
+  si_LKA: ArtistNameSi_LKAQueryInput
+  si_LKA_exists: Boolean
+  AND: [ArtistNameQueryInput!]
+  OR: [ArtistNameQueryInput!]
+}
+input CorrectedSongChordInsertInput {
+  title: String
+  content: [String]
+}
+input ClSongUpdateInput {
+  songData: String
+  songData_unset: Boolean
+  sourceId_inc: Int
+  sourceId_unset: Boolean
+  sourceUrl: String
+  _id_unset: Boolean
+  sourceId: Int
+  hasProcessed: Boolean
+  hasProcessed_unset: Boolean
+  _id: ObjectId
+  songMeta_unset: Boolean
+  songMeta: String
+  sourceUrl_unset: Boolean
+}
+type ArtistNameEn_USA {
+  text: String
+  transliterated: Boolean
 }
 type CorrectedSong {
   _id: ObjectId!
@@ -73,58 +345,24 @@ type CorrectedSong {
   lyricist: [String]
   timeSignature: String
 }
-input CorrectedSongInsertInput {
-  artist: [String]
-  lyricist: [String]
-  composer: [String]
-  timeSignature: String
-  chords: [CorrectedSongChordInsertInput]
+input ArtistNameEn_USAQueryInput {
+  text_gt: String
+  text_exists: Boolean
+  text_in: [String]
+  text_lt: String
+  transliterated_exists: Boolean
+  text_lte: String
+  text_nin: [String]
+  text: String
+  transliterated: Boolean
+  text_ne: String
+  text_gte: String
+  AND: [ArtistNameEn_USAQueryInput!]
+  transliterated_ne: Boolean
+  OR: [ArtistNameEn_USAQueryInput!]
+}
+input ArtistInsertInput {
+  type: [String]
   _id: ObjectId
-}
-input CorrectedSongChordInsertInput {
-  title: String
-  content: [String]
-}
-type Query {
-  correctedSong(query: CorrectedSongQueryInput): CorrectedSong
-  correctedSongs(query: CorrectedSongQueryInput, limit: Int = 100, sortBy: CorrectedSongSortByInput): [CorrectedSong]!
-}
-type Mutation {
-  deleteManyCorrectedSongs(query: CorrectedSongQueryInput): DeleteManyPayload
-  deleteOneCorrectedSong(query: CorrectedSongQueryInput!): CorrectedSong
-  insertManyCorrectedSongs(data: [CorrectedSongInsertInput!]!): InsertManyPayload
-  insertOneCorrectedSong(data: CorrectedSongInsertInput!): CorrectedSong
-  replaceOneCorrectedSong(query: CorrectedSongQueryInput, data: CorrectedSongInsertInput!): CorrectedSong
-  updateManyCorrectedSongs(query: CorrectedSongQueryInput, set: CorrectedSongUpdateInput!): UpdateManyPayload
-  updateOneCorrectedSong(query: CorrectedSongQueryInput, set: CorrectedSongUpdateInput!): CorrectedSong
-  upsertOneCorrectedSong(query: CorrectedSongQueryInput, data: CorrectedSongInsertInput!): CorrectedSong
-}
-type DeleteManyPayload {
-  deletedCount: Int!
-}
-scalar ObjectId
-type CorrectedSongChord {
-  content: [String]
-  title: String
-}
-type InsertManyPayload {
-  insertedIds: [ObjectId]!
-}
-input CorrectedSongUpdateInput {
-  chords_unset: Boolean
-  timeSignature_unset: Boolean
-  _id_unset: Boolean
-  lyricist_unset: Boolean
-  timeSignature: String
-  chords: [CorrectedSongChordUpdateInput]
-  lyricist: [String]
-  artist_unset: Boolean
-  _id: ObjectId
-  composer: [String]
-  composer_unset: Boolean
-  artist: [String]
-}
-type UpdateManyPayload {
-  matchedCount: Int!
-  modifiedCount: Int!
+  name: ArtistNameInsertInput
 }

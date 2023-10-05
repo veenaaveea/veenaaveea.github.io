@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Delete Artist</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modal.close(false);"
+  ></button>
+</div>
+<div class="modal-body">
+  <label for="confirmText" class="form-label">Are you sure?</label>
+  <div class="input-group has-validation">
+    <input type="text" class="form-control" id="confirmText" placeholder="Type '{{ confirmText }}' to confirm" [(ngModel)]="confirmTextInput"
+           aria-label="Text input with checkbox" />
+    <div *ngIf="confirmationError" class="invalid-feedback" [style.display]="confirmationError ? 'block' : 'none'">
+      Please type '{{ confirmText }}' to confirm.
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="modal.close(false);">
+    Cancel
+  </button>
+  <button type="button" class="btn btn-danger" (click)="onDeleteButtonClick();">OK</button>
+</div>

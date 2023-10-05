@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="content">
+        <textarea
+          [(ngModel)]="songData"
+          class="editor"
+          (keydown)="addTab($event)"></textarea>
+      </div>
+    </div>
+    <div class="col-sm overflow-auto">
+      <div class="content" [innerHtml]="parsedSongHtml"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="container m-2 d-flex justify-content-center">
+        <div class="row w-30">
+          <div class="col-sm">
+            <button type="button" class="btn btn-outline-primary w-100" (click)="preview()">Preview</button>
+          </div>
+          <div class="col-sm">
+            <button type="button" class="btn btn-outline-warning w-100" (click)="preview()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

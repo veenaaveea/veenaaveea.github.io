@@ -1,1 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+@import "theme";
+
+$spacer: 1em;
+$spacer_footer: 6em;
+
+@font-face {
+  font-family: fn_chuty;
+  src:url("assets/fonts/fn_chuty.ttf");
+}
+
+html, body {
+  height: 100vh;
+}
+
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -$spacer_footer;
+  padding-bottom: $spacer_footer;
+}
+
+footer {
+  height: 5em;
+}
+
+.h1-sinhala {
+  font-family: fn_chuty;
+  text-transform: none;
+}
+
+.brand-name {
+  padding: 0;
+}
+
+span.chord, span.lyric {
+  display: inline-block;
+}
+
+p.song-line, span.chord {
+  font-family: monospace;
+}
+
+p.song-line-chorus-verse {
+  margin-top: 2em;
+}
+
+.mr-1 {
+  margin-right: $spacer * .25;
+}
+
+.mt-1 {
+  margin-top: $spacer * .25;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.w-80 {
+  width: 80%;
+}
