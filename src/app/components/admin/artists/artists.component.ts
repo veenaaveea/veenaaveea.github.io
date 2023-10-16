@@ -6,7 +6,7 @@ import {Artist} from "../../../graphql/songs.service";
 import {ArtistsData} from "../../../shared/http/response/artists";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {EditArtistComponent} from "./edit-artist/edit-artist.component";
-import {EditableArtist, Name} from "../../../shared/dto/artists";
+import {EditableArtist, LocalisedText} from "../../../shared/dto/artists";
 import {DeleteArtistComponent} from "./delete-artist/delete-artist.component";
 import {NavBarCustomisationService} from "../../../services/nav-bar-customisation.service";
 
@@ -31,14 +31,9 @@ export class ArtistsComponent implements OnInit {
       artists (limit: 1000) {
         _id
         name {
-          si_LKA {
-            text
-            transliterated
-          }
-          en_USA {
-            text
-            transliterated
-          }
+          locale
+          text
+          transliterated
         }
         type
       }
@@ -74,18 +69,28 @@ export class ArtistsComponent implements OnInit {
     const ref = this.modalService.open(EditArtistComponent);
     const artists: {[index: string]:any} = this.artists;
 
-    const editableArtist = {
-      name: new Map<string, Name>(),
+    const editableArtist: EditableArtist = {
+      name: new Map<string, LocalisedText>(),
       type: artists[i].type
     };
 
     if (artists[i].name) {
-      for (let lang of this.supportedLangs) {
+      for (let entry of artists[i].name) {
         const nameInLang = {
-          text: artists[i]?.name[lang]?.text ?? '',
-          transliterated: artists[i]?.name[lang]?.transliterated ?? false
-        } as Name;
-        editableArtist.name.set(lang, nameInLang);
+          text: entry.text ?? '',
+          transliterated: entry.transliterated ?? false
+        } as LocalisedText;
+        editableArtist.name.set(entry.locale, nameInLang);
+      }
+    }
+
+    for (let lang of this.supportedLangs) {
+      if (!editableArtist.name.has(lang)) {
+        editableArtist.name.set(lang, {
+          locale: lang,
+          text: '',
+          transliterated: false
+        })
       }
     }
 
@@ -98,8 +103,9 @@ export class ArtistsComponent implements OnInit {
 
         for (let [lang, name] of editableArtist.name) {
           nameValues = nameValues.concat(`
-            ${lang}: {
-              text: "${name.text.replace(/\\/, '\\\\')}"
+            {
+              locale: "${lang}"
+              text: "${name.text!.replace(/\\/, '\\\\')}"
               transliterated: ${name.transliterated}
             }
           `);
@@ -112,9 +118,9 @@ export class ArtistsComponent implements OnInit {
                 _id: "${id}"
               }
               set: {
-                name: {
+                name: [
                   ${nameValues}
-                }
+                ]
                 type: [
                   ${editableArtist.type.map(this.encapsulateWithQuotes).join(',')}
                 ]
@@ -141,7 +147,7 @@ export class ArtistsComponent implements OnInit {
     const ref = this.modalService.open(EditArtistComponent);
 
     const editableArtist = {
-      name: new Map<string, Name>(),
+      name: new Map<string, LocalisedText>(),
       type: []
     };
 
@@ -149,7 +155,7 @@ export class ArtistsComponent implements OnInit {
       const nameInLang = {
         text: '',
         transliterated: false
-      } as Name;
+      } as LocalisedText;
 
       editableArtist.name.set(lang, nameInLang);
     }
@@ -162,8 +168,9 @@ export class ArtistsComponent implements OnInit {
 
         for (let [lang, name] of editableArtist.name) {
           nameValues = nameValues.concat(`
-            ${lang}: {
-              text: "${name.text.replace(/\\/, '\\\\')}"
+            {
+              locale: "${lang}"
+              text: "${name.text!.replace(/\\/, '\\\\')}"
               transliterated: ${name.transliterated}
             }
           `);
@@ -173,9 +180,9 @@ export class ArtistsComponent implements OnInit {
           mutation {
             insertOneArtist(
               data: {
-                name: {
+                name: [
                   ${nameValues}
-                }
+                ]
                 type: [
                   ${editableArtist.type.map(this.encapsulateWithQuotes).join(',')}
                 ]

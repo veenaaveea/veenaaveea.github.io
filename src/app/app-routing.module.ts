@@ -6,6 +6,7 @@ import {ArtistsComponent} from "./components/admin/artists/artists.component";
 import {authGuard} from "./guard/auth.guard";
 import {LoginComponent} from "./components/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
+import {refreshAuthGuard} from "./guard/refresh-auth.guard";
 
 const ROUTES: Routes = [
   {
@@ -26,6 +27,7 @@ const ROUTES: Routes = [
   },
   {
     path: 'songs/:id',
+    canActivate: [refreshAuthGuard],
     component: ViewSongComponent
   },
   {

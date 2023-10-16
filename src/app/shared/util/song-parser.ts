@@ -34,7 +34,7 @@ export abstract class SongParser {
     for (const s in song.chords!) {
       const section = song.chords[s]!;
       const title = section.title!;
-      songMarkup += `<h3 class="song-section">${title.charAt(0).toUpperCase() + title.slice(1)}</h3>`;
+      songMarkup += `<h6 class="song-section">${title.charAt(0).toUpperCase() + title.slice(1)}</h6>`;
       songMarkup += `<div class='song-sec-content'>`;
 
       const isChorusOrVerse = title.startsWith('chorus') || title.startsWith('verse');

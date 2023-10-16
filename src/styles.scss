@@ -4,6 +4,9 @@
 $spacer: 1em;
 $spacer_footer: 6em;
 
+// Colors
+$bs-pink: #ee0979;
+
 @font-face {
   font-family: fn_chuty;
   src:url("assets/fonts/fn_chuty.ttf");
@@ -32,8 +35,21 @@ footer {
   padding: 0;
 }
 
-span.chord, span.lyric {
-  display: inline-block;
+.player-controls {
+  border: 1px solid $bs-pink;
+  border-radius: 0.25em;
+}
+
+.mr-1 {
+  margin-right: $spacer * .25;
+}
+
+.mt-1 {
+  margin-top: $spacer * .25;
+}
+
+.mt-4 {
+  margin-top: $spacer * 1;
 }
 
 p.song-line, span.chord {
@@ -44,12 +60,16 @@ p.song-line-chorus-verse {
   margin-top: 2em;
 }
 
-.mr-1 {
-  margin-right: $spacer * .25;
+span.time-signature {
+  font-size: 0.75em;
 }
 
-.mt-1 {
-  margin-top: $spacer * .25;
+span.chord, span.lyric {
+  display: inline-block;
+}
+
+.w-1em {
+  width: 1em;
 }
 
 .w-30 {

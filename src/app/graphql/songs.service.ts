@@ -18,86 +18,42 @@ export type Scalars = {
 
 export type Artist = {
   __typename?: 'Artist';
-  _id?: Maybe<Scalars['ObjectId']['output']>;
-  name?: Maybe<ArtistName>;
+  _id: Scalars['ObjectId']['output'];
+  name?: Maybe<Array<Maybe<ArtistName>>>;
   type?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
 export type ArtistInsertInput = {
   _id?: InputMaybe<Scalars['ObjectId']['input']>;
-  name?: InputMaybe<ArtistNameInsertInput>;
+  name?: InputMaybe<Array<InputMaybe<ArtistNameInsertInput>>>;
   type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type ArtistName = {
   __typename?: 'ArtistName';
-  en_USA?: Maybe<ArtistNameEn_Usa>;
-  si_LKA?: Maybe<ArtistNameSi_Lka>;
-};
-
-export type ArtistNameEn_Usa = {
-  __typename?: 'ArtistNameEn_USA';
+  locale?: Maybe<Scalars['String']['output']>;
   text?: Maybe<Scalars['String']['output']>;
   transliterated?: Maybe<Scalars['Boolean']['output']>;
 };
 
-export type ArtistNameEn_UsaInsertInput = {
-  text?: InputMaybe<Scalars['String']['input']>;
-  transliterated?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type ArtistNameEn_UsaQueryInput = {
-  AND?: InputMaybe<Array<ArtistNameEn_UsaQueryInput>>;
-  OR?: InputMaybe<Array<ArtistNameEn_UsaQueryInput>>;
-  text?: InputMaybe<Scalars['String']['input']>;
-  text_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  text_gt?: InputMaybe<Scalars['String']['input']>;
-  text_gte?: InputMaybe<Scalars['String']['input']>;
-  text_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  text_lt?: InputMaybe<Scalars['String']['input']>;
-  text_lte?: InputMaybe<Scalars['String']['input']>;
-  text_ne?: InputMaybe<Scalars['String']['input']>;
-  text_nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  transliterated?: InputMaybe<Scalars['Boolean']['input']>;
-  transliterated_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  transliterated_ne?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type ArtistNameEn_UsaUpdateInput = {
-  text?: InputMaybe<Scalars['String']['input']>;
-  text_unset?: InputMaybe<Scalars['Boolean']['input']>;
-  transliterated?: InputMaybe<Scalars['Boolean']['input']>;
-  transliterated_unset?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 export type ArtistNameInsertInput = {
-  en_USA?: InputMaybe<ArtistNameEn_UsaInsertInput>;
-  si_LKA?: InputMaybe<ArtistNameSi_LkaInsertInput>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  transliterated?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type ArtistNameQueryInput = {
   AND?: InputMaybe<Array<ArtistNameQueryInput>>;
   OR?: InputMaybe<Array<ArtistNameQueryInput>>;
-  en_USA?: InputMaybe<ArtistNameEn_UsaQueryInput>;
-  en_USA_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  si_LKA?: InputMaybe<ArtistNameSi_LkaQueryInput>;
-  si_LKA_exists?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type ArtistNameSi_Lka = {
-  __typename?: 'ArtistNameSi_LKA';
-  text?: Maybe<Scalars['String']['output']>;
-  transliterated?: Maybe<Scalars['Boolean']['output']>;
-};
-
-export type ArtistNameSi_LkaInsertInput = {
-  text?: InputMaybe<Scalars['String']['input']>;
-  transliterated?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type ArtistNameSi_LkaQueryInput = {
-  AND?: InputMaybe<Array<ArtistNameSi_LkaQueryInput>>;
-  OR?: InputMaybe<Array<ArtistNameSi_LkaQueryInput>>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  locale_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  locale_gt?: InputMaybe<Scalars['String']['input']>;
+  locale_gte?: InputMaybe<Scalars['String']['input']>;
+  locale_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  locale_lt?: InputMaybe<Scalars['String']['input']>;
+  locale_lte?: InputMaybe<Scalars['String']['input']>;
+  locale_ne?: InputMaybe<Scalars['String']['input']>;
+  locale_nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   text?: InputMaybe<Scalars['String']['input']>;
   text_exists?: InputMaybe<Scalars['Boolean']['input']>;
   text_gt?: InputMaybe<Scalars['String']['input']>;
@@ -112,18 +68,13 @@ export type ArtistNameSi_LkaQueryInput = {
   transliterated_ne?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type ArtistNameSi_LkaUpdateInput = {
+export type ArtistNameUpdateInput = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  locale_unset?: InputMaybe<Scalars['Boolean']['input']>;
   text?: InputMaybe<Scalars['String']['input']>;
   text_unset?: InputMaybe<Scalars['Boolean']['input']>;
   transliterated?: InputMaybe<Scalars['Boolean']['input']>;
   transliterated_unset?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type ArtistNameUpdateInput = {
-  en_USA?: InputMaybe<ArtistNameEn_UsaUpdateInput>;
-  en_USA_unset?: InputMaybe<Scalars['Boolean']['input']>;
-  si_LKA?: InputMaybe<ArtistNameSi_LkaUpdateInput>;
-  si_LKA_unset?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type ArtistQueryInput = {
@@ -138,8 +89,10 @@ export type ArtistQueryInput = {
   _id_lte?: InputMaybe<Scalars['ObjectId']['input']>;
   _id_ne?: InputMaybe<Scalars['ObjectId']['input']>;
   _id_nin?: InputMaybe<Array<InputMaybe<Scalars['ObjectId']['input']>>>;
-  name?: InputMaybe<ArtistNameQueryInput>;
+  name?: InputMaybe<Array<InputMaybe<ArtistNameQueryInput>>>;
   name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  name_in?: InputMaybe<Array<InputMaybe<ArtistNameQueryInput>>>;
+  name_nin?: InputMaybe<Array<InputMaybe<ArtistNameQueryInput>>>;
   type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   type_exists?: InputMaybe<Scalars['Boolean']['input']>;
   type_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -154,7 +107,7 @@ export enum ArtistSortByInput {
 export type ArtistUpdateInput = {
   _id?: InputMaybe<Scalars['ObjectId']['input']>;
   _id_unset?: InputMaybe<Scalars['Boolean']['input']>;
-  name?: InputMaybe<ArtistNameUpdateInput>;
+  name?: InputMaybe<Array<InputMaybe<ArtistNameUpdateInput>>>;
   name_unset?: InputMaybe<Scalars['Boolean']['input']>;
   type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   type_unset?: InputMaybe<Scalars['Boolean']['input']>;
@@ -263,12 +216,19 @@ export type ClSongUpdateInput = {
 
 export type CorrectedSong = {
   __typename?: 'CorrectedSong';
-  _id: Scalars['ObjectId']['output'];
-  artist?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  _id?: Maybe<Scalars['ObjectId']['output']>;
+  artist?: Maybe<Array<Maybe<Artist>>>;
   chords?: Maybe<Array<Maybe<CorrectedSongChord>>>;
-  composer?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  lyricist?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  composer?: Maybe<Array<Maybe<Artist>>>;
+  lyricist?: Maybe<Array<Maybe<Artist>>>;
+  srcId?: Maybe<Scalars['ObjectId']['output']>;
   timeSignature?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Array<Maybe<CorrectedSongTitle>>>;
+};
+
+export type CorrectedSongArtistRelationInput = {
+  create?: InputMaybe<Array<InputMaybe<ArtistInsertInput>>>;
+  link?: InputMaybe<Array<InputMaybe<Scalars['ObjectId']['input']>>>;
 };
 
 export type CorrectedSongChord = {
@@ -307,13 +267,25 @@ export type CorrectedSongChordUpdateInput = {
   title_unset?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type CorrectedSongComposerRelationInput = {
+  create?: InputMaybe<Array<InputMaybe<ArtistInsertInput>>>;
+  link?: InputMaybe<Array<InputMaybe<Scalars['ObjectId']['input']>>>;
+};
+
 export type CorrectedSongInsertInput = {
   _id?: InputMaybe<Scalars['ObjectId']['input']>;
-  artist?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  artist?: InputMaybe<CorrectedSongArtistRelationInput>;
   chords?: InputMaybe<Array<InputMaybe<CorrectedSongChordInsertInput>>>;
-  composer?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  lyricist?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  composer?: InputMaybe<CorrectedSongComposerRelationInput>;
+  lyricist?: InputMaybe<CorrectedSongLyricistRelationInput>;
+  srcId?: InputMaybe<Scalars['ObjectId']['input']>;
   timeSignature?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Array<InputMaybe<CorrectedSongTitleInsertInput>>>;
+};
+
+export type CorrectedSongLyricistRelationInput = {
+  create?: InputMaybe<Array<InputMaybe<ArtistInsertInput>>>;
+  link?: InputMaybe<Array<InputMaybe<Scalars['ObjectId']['input']>>>;
 };
 
 export type CorrectedSongQueryInput = {
@@ -328,22 +300,31 @@ export type CorrectedSongQueryInput = {
   _id_lte?: InputMaybe<Scalars['ObjectId']['input']>;
   _id_ne?: InputMaybe<Scalars['ObjectId']['input']>;
   _id_nin?: InputMaybe<Array<InputMaybe<Scalars['ObjectId']['input']>>>;
-  artist?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  artist?: InputMaybe<Array<InputMaybe<ArtistQueryInput>>>;
   artist_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  artist_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  artist_nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  artist_in?: InputMaybe<Array<InputMaybe<ArtistQueryInput>>>;
+  artist_nin?: InputMaybe<Array<InputMaybe<ArtistQueryInput>>>;
   chords?: InputMaybe<Array<InputMaybe<CorrectedSongChordQueryInput>>>;
   chords_exists?: InputMaybe<Scalars['Boolean']['input']>;
   chords_in?: InputMaybe<Array<InputMaybe<CorrectedSongChordQueryInput>>>;
   chords_nin?: InputMaybe<Array<InputMaybe<CorrectedSongChordQueryInput>>>;
-  composer?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  composer?: InputMaybe<Array<InputMaybe<ArtistQueryInput>>>;
   composer_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  composer_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  composer_nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  lyricist?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  composer_in?: InputMaybe<Array<InputMaybe<ArtistQueryInput>>>;
+  composer_nin?: InputMaybe<Array<InputMaybe<ArtistQueryInput>>>;
+  lyricist?: InputMaybe<Array<InputMaybe<ArtistQueryInput>>>;
   lyricist_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  lyricist_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  lyricist_nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lyricist_in?: InputMaybe<Array<InputMaybe<ArtistQueryInput>>>;
+  lyricist_nin?: InputMaybe<Array<InputMaybe<ArtistQueryInput>>>;
+  srcId?: InputMaybe<Scalars['ObjectId']['input']>;
+  srcId_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  srcId_gt?: InputMaybe<Scalars['ObjectId']['input']>;
+  srcId_gte?: InputMaybe<Scalars['ObjectId']['input']>;
+  srcId_in?: InputMaybe<Array<InputMaybe<Scalars['ObjectId']['input']>>>;
+  srcId_lt?: InputMaybe<Scalars['ObjectId']['input']>;
+  srcId_lte?: InputMaybe<Scalars['ObjectId']['input']>;
+  srcId_ne?: InputMaybe<Scalars['ObjectId']['input']>;
+  srcId_nin?: InputMaybe<Array<InputMaybe<Scalars['ObjectId']['input']>>>;
   timeSignature?: InputMaybe<Scalars['String']['input']>;
   timeSignature_exists?: InputMaybe<Scalars['Boolean']['input']>;
   timeSignature_gt?: InputMaybe<Scalars['String']['input']>;
@@ -353,28 +334,86 @@ export type CorrectedSongQueryInput = {
   timeSignature_lte?: InputMaybe<Scalars['String']['input']>;
   timeSignature_ne?: InputMaybe<Scalars['String']['input']>;
   timeSignature_nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title?: InputMaybe<Array<InputMaybe<CorrectedSongTitleQueryInput>>>;
+  title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  title_in?: InputMaybe<Array<InputMaybe<CorrectedSongTitleQueryInput>>>;
+  title_nin?: InputMaybe<Array<InputMaybe<CorrectedSongTitleQueryInput>>>;
 };
 
 export enum CorrectedSongSortByInput {
+  SrcidAsc = 'SRCID_ASC',
+  SrcidDesc = 'SRCID_DESC',
   TimesignatureAsc = 'TIMESIGNATURE_ASC',
   TimesignatureDesc = 'TIMESIGNATURE_DESC',
   IdAsc = '_ID_ASC',
   IdDesc = '_ID_DESC'
 }
 
+export type CorrectedSongTitle = {
+  __typename?: 'CorrectedSongTitle';
+  locale?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+  transliterated?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type CorrectedSongTitleInsertInput = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  transliterated?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CorrectedSongTitleQueryInput = {
+  AND?: InputMaybe<Array<CorrectedSongTitleQueryInput>>;
+  OR?: InputMaybe<Array<CorrectedSongTitleQueryInput>>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  locale_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  locale_gt?: InputMaybe<Scalars['String']['input']>;
+  locale_gte?: InputMaybe<Scalars['String']['input']>;
+  locale_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  locale_lt?: InputMaybe<Scalars['String']['input']>;
+  locale_lte?: InputMaybe<Scalars['String']['input']>;
+  locale_ne?: InputMaybe<Scalars['String']['input']>;
+  locale_nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  text_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  text_gt?: InputMaybe<Scalars['String']['input']>;
+  text_gte?: InputMaybe<Scalars['String']['input']>;
+  text_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  text_lt?: InputMaybe<Scalars['String']['input']>;
+  text_lte?: InputMaybe<Scalars['String']['input']>;
+  text_ne?: InputMaybe<Scalars['String']['input']>;
+  text_nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  transliterated?: InputMaybe<Scalars['Boolean']['input']>;
+  transliterated_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  transliterated_ne?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CorrectedSongTitleUpdateInput = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  locale_unset?: InputMaybe<Scalars['Boolean']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  text_unset?: InputMaybe<Scalars['Boolean']['input']>;
+  transliterated?: InputMaybe<Scalars['Boolean']['input']>;
+  transliterated_unset?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type CorrectedSongUpdateInput = {
   _id?: InputMaybe<Scalars['ObjectId']['input']>;
   _id_unset?: InputMaybe<Scalars['Boolean']['input']>;
-  artist?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  artist?: InputMaybe<CorrectedSongArtistRelationInput>;
   artist_unset?: InputMaybe<Scalars['Boolean']['input']>;
   chords?: InputMaybe<Array<InputMaybe<CorrectedSongChordUpdateInput>>>;
   chords_unset?: InputMaybe<Scalars['Boolean']['input']>;
-  composer?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  composer?: InputMaybe<CorrectedSongComposerRelationInput>;
   composer_unset?: InputMaybe<Scalars['Boolean']['input']>;
-  lyricist?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lyricist?: InputMaybe<CorrectedSongLyricistRelationInput>;
   lyricist_unset?: InputMaybe<Scalars['Boolean']['input']>;
+  srcId?: InputMaybe<Scalars['ObjectId']['input']>;
+  srcId_unset?: InputMaybe<Scalars['Boolean']['input']>;
   timeSignature?: InputMaybe<Scalars['String']['input']>;
   timeSignature_unset?: InputMaybe<Scalars['Boolean']['input']>;
+  title?: InputMaybe<Array<InputMaybe<CorrectedSongTitleUpdateInput>>>;
+  title_unset?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type DeleteManyPayload = {
