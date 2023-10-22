@@ -6,6 +6,8 @@ $spacer_footer: 6em;
 
 // Colors
 $bs-pink: #ee0979;
+$bs-red: #dc3545;
+$bs-gray-200: #e9ecef;
 
 @font-face {
   font-family: fn_chuty;
@@ -35,9 +37,45 @@ footer {
   padding: 0;
 }
 
+.current-playing-chord {
+  color: $bs-pink;
+}
+
 .player-controls {
   border: 1px solid $bs-pink;
-  border-radius: 0.25em;
+  border-radius: 0.5em;
+}
+
+
+.song-content {
+  $scroll-width: 0.2em;
+  $scroll-border-radius: 0.1em;
+
+  max-height: 65vh;
+  overflow-y: scroll;
+
+  // scroll bar
+  /* width */
+  &::-webkit-scrollbar {
+    width: $scroll-width;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border-radius: $scroll-width;
+    background-color: $bs-gray-200;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $bs-pink;
+    border-radius: $scroll-border-radius;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: $bs-red;
+  }
 }
 
 .mr-1 {

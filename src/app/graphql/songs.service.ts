@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  Long: { input: any; output: any; }
   ObjectId: { input: any; output: any; }
 };
 
@@ -222,6 +223,7 @@ export type CorrectedSong = {
   composer?: Maybe<Array<Maybe<Artist>>>;
   lyricist?: Maybe<Array<Maybe<Artist>>>;
   srcId?: Maybe<Scalars['ObjectId']['output']>;
+  tempo?: Maybe<Scalars['Long']['output']>;
   timeSignature?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Array<Maybe<CorrectedSongTitle>>>;
 };
@@ -279,6 +281,7 @@ export type CorrectedSongInsertInput = {
   composer?: InputMaybe<CorrectedSongComposerRelationInput>;
   lyricist?: InputMaybe<CorrectedSongLyricistRelationInput>;
   srcId?: InputMaybe<Scalars['ObjectId']['input']>;
+  tempo?: InputMaybe<Scalars['Long']['input']>;
   timeSignature?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Array<InputMaybe<CorrectedSongTitleInsertInput>>>;
 };
@@ -325,6 +328,15 @@ export type CorrectedSongQueryInput = {
   srcId_lte?: InputMaybe<Scalars['ObjectId']['input']>;
   srcId_ne?: InputMaybe<Scalars['ObjectId']['input']>;
   srcId_nin?: InputMaybe<Array<InputMaybe<Scalars['ObjectId']['input']>>>;
+  tempo?: InputMaybe<Scalars['Long']['input']>;
+  tempo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  tempo_gt?: InputMaybe<Scalars['Long']['input']>;
+  tempo_gte?: InputMaybe<Scalars['Long']['input']>;
+  tempo_in?: InputMaybe<Array<InputMaybe<Scalars['Long']['input']>>>;
+  tempo_lt?: InputMaybe<Scalars['Long']['input']>;
+  tempo_lte?: InputMaybe<Scalars['Long']['input']>;
+  tempo_ne?: InputMaybe<Scalars['Long']['input']>;
+  tempo_nin?: InputMaybe<Array<InputMaybe<Scalars['Long']['input']>>>;
   timeSignature?: InputMaybe<Scalars['String']['input']>;
   timeSignature_exists?: InputMaybe<Scalars['Boolean']['input']>;
   timeSignature_gt?: InputMaybe<Scalars['String']['input']>;
@@ -343,6 +355,8 @@ export type CorrectedSongQueryInput = {
 export enum CorrectedSongSortByInput {
   SrcidAsc = 'SRCID_ASC',
   SrcidDesc = 'SRCID_DESC',
+  TempoAsc = 'TEMPO_ASC',
+  TempoDesc = 'TEMPO_DESC',
   TimesignatureAsc = 'TIMESIGNATURE_ASC',
   TimesignatureDesc = 'TIMESIGNATURE_DESC',
   IdAsc = '_ID_ASC',
@@ -410,6 +424,8 @@ export type CorrectedSongUpdateInput = {
   lyricist_unset?: InputMaybe<Scalars['Boolean']['input']>;
   srcId?: InputMaybe<Scalars['ObjectId']['input']>;
   srcId_unset?: InputMaybe<Scalars['Boolean']['input']>;
+  tempo?: InputMaybe<Scalars['Long']['input']>;
+  tempo_unset?: InputMaybe<Scalars['Boolean']['input']>;
   timeSignature?: InputMaybe<Scalars['String']['input']>;
   timeSignature_unset?: InputMaybe<Scalars['Boolean']['input']>;
   title?: InputMaybe<Array<InputMaybe<CorrectedSongTitleUpdateInput>>>;

@@ -45,7 +45,9 @@ export abstract class SongParser {
             return singlish.parse(m);
           })
           .replace(/ /g, '&nbsp;')
-          .replace(/\[/g, `<span class="chord ${isChorusOrVerse ? 'chord-chorus-verse' : ''}">`)
+          .replace(/\(/g, '</span><span class="d-none stay-on-count">')
+          .replace(/\)/g, '</span>')
+          .replace(/\[/g, `<span class="chord ${isChorusOrVerse ? 'chord-chorus-verse' : ''}"><span class="chord-string">`)
           .replace(/\{/g, '<span class="lyric">')
           .replace(/[}\]]/g, '</span>');
 

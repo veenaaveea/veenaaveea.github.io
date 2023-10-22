@@ -16,7 +16,11 @@ import {DeleteArtistComponent} from './components/admin/artists/delete-artist/de
 import {LoginComponent} from './components/login/login.component';
 import {LoaderComponent} from './components/loader/loader.component';
 import {LoaderInterceptor} from "./interceptors/loader";
-import { HomeComponent } from './components/home/home.component';
+import {HomeComponent} from './components/home/home.component';
+import {NgbPopover} from "@ng-bootstrap/ng-bootstrap";
+import {
+  AdditionalControlsComponent
+} from './components/songs/view-song/additional-controls/additional-controls.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { HomeComponent } from './components/home/home.component';
     ApolloModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbPopover,
+    AdditionalControlsComponent
   ],
   providers: [
     {
